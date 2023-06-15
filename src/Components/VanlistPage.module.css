@@ -1,0 +1,11 @@
+.van-list-container {
+  padding-inline: 23px;
+}
+
+.van-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  gap: 34px;
+  margin-top: 57px;
+}

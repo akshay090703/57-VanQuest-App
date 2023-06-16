@@ -9,6 +9,7 @@ export default function Navbar() {
         #VANQUEST
       </Link>
       <nav>
+        <Link to="/host">Host</Link>
         <Link to="/about">About</Link>
         <Link to="/vans">Vans</Link>
       </nav>

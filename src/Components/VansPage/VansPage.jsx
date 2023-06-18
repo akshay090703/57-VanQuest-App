@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import VanTemplate from "../UI/VanPageTemplate";
 
-export default function Vans(props) {
+export default function Vans() {
   const params = useParams();
   const [van, setVan] = useState(null);
 

@@ -5,7 +5,7 @@ import classes from "./HostVansTemplate.module.css";
 export default function HostVanTemplate(props) {
   return (
     <Link
-      to={`/host/vans/${props.van.id}`}
+      to={props.van.id}
       key={props.van.id}
       className={classes["host-van-link-wrapper"]}
     >

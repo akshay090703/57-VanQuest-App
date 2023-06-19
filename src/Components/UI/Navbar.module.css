@@ -28,3 +28,12 @@ header a:hover {
   color: #161616;
   text-decoration: underline;
 }
+
+.login-icon {
+  width: 20px;
+}
+
+.login-link {
+  position: relative;
+  top: 4px;
+}

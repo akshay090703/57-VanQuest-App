@@ -1,36 +1,25 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { useSearchParams, useLoaderData } from "react-router-dom";
 import Van from "./VanComponent";
 import { getVans } from "../../api";
 
 import classes from "./VanlistPage.module.css";
 
+export function loader() {
+  return getVans();
+}
+
 export default function Vanslist() {
-  const [vans, setVans] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const vans = useLoaderData();
 
   const typeFilter = searchParams.get("type");
 
   const filteredArray = typeFilter
     ? vans.filter((van) => van.type === typeFilter)
     : vans;
-
-  useEffect(() => {
-    async function loadVans() {
-      setLoading(true);
-      try {
-        const data = await getVans();
-        setVans(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadVans();
-  }, []);
 
   const vanElements = filteredArray.map((van) => {
     return (
@@ -56,10 +45,6 @@ export default function Vanslist() {
       }
       return prevParams;
     });
-  }
-
-  if (loading) {
-    return <h1>Loading...</h1>;
   }
 
   if (error) {

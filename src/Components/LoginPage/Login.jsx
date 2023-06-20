@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 import classes from "./Login.module.css";
+
+export function loader({ request }) {
+  return new URL(request.url).searchParams.get("message");
+}
 
 export default function Login() {
   const [loginFormData, setLoginFormData] = useState({

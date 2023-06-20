@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding-inline: 27px;
-  padding-top: 30%;
+  padding-top: 10%;
 }
 
 .login-form {
@@ -55,4 +55,8 @@
 
 .loginBtn:hover {
   background-color: #ff6700;
+}
+
+.red {
+  color: #cc0000;
 }

@@ -1,28 +1,24 @@
 import { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, useLoaderData } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { getHostVans } from "../../api";
 import HostVanDetailsNavbar from "../UI/HostVanDetailsNavbar";
+import requireAuth from "../../utils";
 
 import classes from "./HostVanDetail.module.css";
 
+export async function loader({ params }) {
+  await requireAuth();
+  return getHostVans(params.id);
+}
+
 export default function HostVanDetail() {
-  const { id } = useParams();
-  const [currentVan, setCurrentVan] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/host/vans/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCurrentVan(data.vans));
-  }, []);
-
-  if (!currentVan) {
-    return <h1>Loading...</h1>;
-  }
+  const currentVan = useLoaderData();
 
   return (
     <section>
       <Link to=".." relative="path" className={classes["back-button"]}>
-        &larr; <span>Back to all vans</span>
+        &larr; <span>Back to listed vans</span>
       </Link>
 
       <div className={classes["host-van-detail-layout-container"]}>

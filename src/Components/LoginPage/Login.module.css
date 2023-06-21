@@ -57,6 +57,11 @@
   background-color: #ff6700;
 }
 
+.loginBtn:disabled {
+  cursor: not-allowed;
+  background-color: #aaaaaa;
+}
+
 .red {
   color: #cc0000;
 }

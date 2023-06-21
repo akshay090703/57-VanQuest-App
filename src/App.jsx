@@ -7,7 +7,10 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Login, { loader as loginLoader } from "./Components/LoginPage/Login";
+import Login, {
+  loader as loginLoader,
+  action as loginAction,
+} from "./Components/LoginPage/Login";
 import Home from "./Components/HomePage";
 import About from "./Components/AboutPage/AboutPage";
 import Vanslist, {
@@ -31,7 +34,6 @@ import HostVanInfo from "./Components/Host/HostVanInfo";
 import NotFound from "./Components/UI/NotFoundPage";
 import Error from "./Components/UI/Error";
 import requireAuth from "./utils";
-import { loader } from "./Components/LoginPage/Login";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -39,7 +41,12 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="login" element={<Login />} loader={loginLoader} />
+        <Route
+          path="login"
+          element={<Login />}
+          loader={loginLoader}
+          action={loginAction}
+        />
         <Route
           path="vans"
           element={<Vanslist />}
@@ -57,19 +64,19 @@ export default function App() {
           <Route
             index
             element={<Dashboard />}
-            loader={async () => await requireAuth()}
+            loader={async ({ request }) => await requireAuth(request)}
             errorElement={<Error />}
           />
           <Route
             path="income"
             element={<Income />}
-            loader={async () => await requireAuth()}
+            loader={async ({ request }) => await requireAuth(request)}
             errorElement={<Error />}
           />
           <Route
             path="reviews"
             element={<Reviews />}
-            loader={async () => await requireAuth()}
+            loader={async ({ request }) => await requireAuth(request)}
             errorElement={<Error />}
           />
           <Route
@@ -86,19 +93,19 @@ export default function App() {
             <Route
               index
               element={<HostVanInfo />}
-              loader={async () => await requireAuth()}
+              loader={async ({ request }) => await requireAuth(request)}
               errorElement={<Error />}
             />
             <Route
               path="pricing"
               element={<HostVanPricing />}
-              loader={async () => await requireAuth()}
+              loader={async ({ request }) => await requireAuth(request)}
               errorElement={<Error />}
             />
             <Route
               path="photos"
               element={<HostVanPhotos />}
-              loader={async () => await requireAuth()}
+              loader={async ({ request }) => await requireAuth(request)}
               errorElement={<Error />}
             />
           </Route>

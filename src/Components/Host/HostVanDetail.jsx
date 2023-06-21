@@ -7,8 +7,8 @@ import requireAuth from "../../utils";
 
 import classes from "./HostVanDetail.module.css";
 
-export async function loader({ params }) {
-  await requireAuth();
+export async function loader({ params, request }) {
+  await requireAuth(request);
   return getHostVans(params.id);
 }
 

@@ -116,14 +116,3 @@
 i[class*="van-type-"] {
   padding: 7px 14px;
 }
-
-.back-button {
-  display: block;
-  color: black;
-  text-decoration: none;
-  /* margin-left: 26px; */
-}
-
-.back-button span:hover {
-  text-decoration: underline;
-}

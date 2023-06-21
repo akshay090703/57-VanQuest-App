@@ -4,7 +4,6 @@ import {
   createRoutesFromElements,
   RouterProvider,
   Route,
-  Navigate,
 } from "react-router-dom";
 
 import Login, {
@@ -20,7 +19,9 @@ import Layout from "./Components/Layout/Layout";
 import Vans, {
   loader as vanDetailLoader,
 } from "./Components/VansPage/VansPage";
-import Dashboard from "./Components/Host/HostDashboard";
+import Dashboard, {
+  loader as dashBoardLoader,
+} from "./Components/Host/HostDashboard";
 import Income from "./Components/Host/Income";
 import Reviews from "./Components/Host/ReviewsPage";
 import HostLayout from "./Components/Layout/HostLayout";
@@ -64,7 +65,7 @@ export default function App() {
           <Route
             index
             element={<Dashboard />}
-            loader={async ({ request }) => await requireAuth(request)}
+            loader={dashBoardLoader}
             errorElement={<Error />}
           />
           <Route
@@ -89,6 +90,7 @@ export default function App() {
             path="vans/:id"
             loader={hostVanDetailLoader}
             element={<HostVanDetail />}
+            errorElement={<Error />}
           >
             <Route
               index

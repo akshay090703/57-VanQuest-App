@@ -1,3 +1,67 @@
+import { Suspense } from "react";
+import { Link, defer, Await, useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../api";
+import requireAuth from "../../utils";
+import { BsStarFill } from "react-icons/bs";
+
+import classes from "./HostDashboard.module.css";
+
+export async function loader({ request }) {
+  await requireAuth(request);
+  return defer({ vans: getHostVans() });
+}
+
 export default function Dashboard() {
-  return <h1>Dashboard page is here</h1>;
+  const loaderData = useLoaderData();
+
+  function renderVanElements(vans) {
+    const hostVansEls = vans.map((van) => (
+      <div className={classes["host-van-single"]} key={van.id}>
+        <img src={van.imageUrl} alt={`Photo of ${van.name}`} />
+        <div className={classes["host-van-info"]}>
+          <h3>{van.name}</h3>
+          <p>${van.price}/day</p>
+        </div>
+        <Link to={`vans/${van.id}`}>View</Link>
+      </div>
+    ));
+
+    return (
+      <div className={classes["host-vans-list"]}>
+        <section>{hostVansEls}</section>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <section className={classes["host-dashboard-earnings"]}>
+        <div className={classes.info}>
+          <h1>Welcome!</h1>
+          <p>
+            Income last <span>30 days</span>
+          </p>
+          <h2>$2,260</h2>
+        </div>
+        <Link to="income">Details</Link>
+      </section>
+      <section className={classes["host-dashboard-reviews"]}>
+        <h2>Review score</h2>
+        <BsStarFill className={classes.star} />
+        <p>
+          <span>5.0</span>/5
+        </p>
+        <Link to="reviews">Details</Link>
+      </section>
+      <section className={classes["host-dashboard-vans"]}>
+        <div className={classes.top}>
+          <h2>Your listed vans</h2>
+          <Link to="vans">View all</Link>
+        </div>
+        <Suspense fallback={<h3>Loading...</h3>}>
+          <Await resolve={loaderData.vans}>{renderVanElements}</Await>
+        </Suspense>
+      </section>
+    </>
+  );
 }

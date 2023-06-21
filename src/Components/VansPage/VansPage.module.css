@@ -1,0 +1,12 @@
+.back-button {
+  display: block;
+  margin: 30px;
+  margin-bottom: 0;
+  color: black;
+  text-decoration: none;
+  /* margin-left: 26px; */
+}
+
+.back-button span:hover {
+  text-decoration: underline;
+}

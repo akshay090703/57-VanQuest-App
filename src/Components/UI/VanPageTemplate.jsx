@@ -1,23 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
-
 import classes from "./VanPageTemplate.module.css";
 
 export default function VanTemplate(props) {
-  const location = useLocation();
-
-  const search = location.state?.searchParams || "";
-  const type = location.state?.type || "all";
-
   return (
     <div className={classes["van-detail-container"]}>
-      <Link
-        to={`..${search}`}
-        relative="path"
-        className={classes["back-button"]}
-      >
-        &larr; <span>Back to {type} vans</span>
-      </Link>
-
       <div className={classes["van-detail"]}>
         <img src={props.vans.imageUrl} />
         <i
